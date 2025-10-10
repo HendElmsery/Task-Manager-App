@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+Project: Task Manager App (with User Auth)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ Goal
 
-## Available Scripts
+A web app to manage tasks only after user login.
 
-In the project directory, you can run:
+**Features:**
 
-### `npm start`
+* Login / Logout
+* Create new tasks
+* View tasks by status (In Progress / Completed)
+* Mark tasks as completed
+* Navigate between pages using React Router
+* Persist user + tasks in LocalStorage
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+ Pages & Features
 
-### `npm test`
+1. **Login Page**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    * Username input (optional: password for realism, but not validated here).
+    * On login → save user in Context + LocalStorage.
+    * Redirect to Dashboard.
 
-### `npm run build`
+2. **Dashboard (Home)**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    * Overview of task counts:
+    
+      * Total
+      * In Progress
+      * Completed
+    * Shows user’s name.
+      
+3. **New Task Page**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  * Form: `title`, `description`.
+  * Save new task with status = `"in-progress"`.
+    
+4. **Tasks in Progress Page**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  * List tasks where `status = "in-progress"`.
+  * Each task has a **Mark as Completed** button.
 
-### `npm run eject`
+5. **Completed Tasks Page**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  * List tasks where `status = "completed"`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+6. **Navbar**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+  * Links: Dashboard, New Task, In Progress, Completed.
+  * Shows current username.
+  * Logout button (clears user + tasks).
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
+Authentication Rules
 
-## Learn More
+* If user not logged in → always redirected to **Login**.
+* After login → user stays logged in via LocalStorage.
+* Logout → clears user, redirects to Login.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Tech Stack
 
-### Code Splitting
+* **React 18+**
+* **React Router v7**
+* **Context API**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  * `TaskContext` → manage tasks
+  * `UserContext` → manage login/logout
+* **LocalStorage** → simulate backend persistence
+* Styling: Tailwind,  plain CSS 
