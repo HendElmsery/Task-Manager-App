@@ -1,26 +1,72 @@
-
 import './App.css';
-import{Route,Routes} from "react-router-dom"
-import Dashboard from './Pages/Dshboard';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from './Pages/Dashboard';
 import CompletedTasks from './Pages/CompletedTasks';
 import TasksProgress from './Pages/TasksProgress';
 import NewTask from './Pages/NewTask';
-import Home from './Pages/Home';
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
+import Navbar from './Pages/Navbar';
+import { UserContextProvider, UserContext } from './Context/UserContext';
+import ProtectedRoute from './Pages/ProtectedRoute';
+import { useContext } from 'react';
+
+function AppContent() {
+  const { user } = useContext(UserContext);
+
+  return (
+    <>
+      {user && <Navbar />} {/* Show navbar only when logged in */}
+
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+
+        {/* Protected Routes */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/completed_tasks"
+          element={
+            <ProtectedRoute>
+              <CompletedTasks />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/task_progress"
+          element={
+            <ProtectedRoute>
+              <TasksProgress />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/new_task"
+          element={
+            <ProtectedRoute>
+              <NewTask />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </>
+  );
+}
+
 function App() {
   return (
     <div className="App">
-      <Home/>
-      <Routes>
-      <Route path='dashboard' element={<Dashboard/>}/>
-      <Route path='completed_tasks' element={<CompletedTasks/>}/>
-      <Route path='task_progress' element={<TasksProgress/>}/>
-      <Route path='new_task' element={<NewTask/>}/>
-      <Route path='login' element={<Login/>}/>
-      <Route path='signup' element={<SignUp/>}/>
-      </Routes>
-     
+      <UserContextProvider>
+          <AppContent />
+      </UserContextProvider>
     </div>
   );
 }

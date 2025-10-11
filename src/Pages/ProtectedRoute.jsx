@@ -1,0 +1,16 @@
+// src/components/ProtectedRoute.jsx
+import React, { useContext } from "react";
+import { Navigate } from "react-router-dom";
+import { UserContext } from "../Context/UserContext";
+
+export default function ProtectedRoute({ children }) {
+  const { user } = useContext(UserContext);
+
+  // If not logged in → redirect to /login
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  // Otherwise render the page content
+  return children;
+}
