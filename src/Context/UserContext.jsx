@@ -42,7 +42,7 @@ export function UserContextProvider(props) {
             }
         })
         const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-            if (session?.user) {
+            if (session?.user|| null) {
                 setUser(session.user);
             } else {
                 setUser(null);
@@ -54,7 +54,7 @@ export function UserContextProvider(props) {
         };
     }, [])
     return (
-        <UserContext.Provider value={{ user,logIn,logOut,signUp }}>
+        <UserContext.Provider value={{ user,logIn,logOut,signUp,setUser }}>
             {props.children}
         </UserContext.Provider>
 

@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Dashboard from './Pages/Dashboard';
 import CompletedTasks from './Pages/CompletedTasks';
 import TasksProgress from './Pages/TasksProgress';
@@ -10,6 +10,7 @@ import Navbar from './Pages/Navbar';
 import { UserContextProvider, UserContext } from './Context/UserContext';
 import ProtectedRoute from './Pages/ProtectedRoute';
 import { useContext } from 'react';
+import TasksContextProvider from './Context/TasksContext';
 
 function AppContent() {
   const { user } = useContext(UserContext);
@@ -65,7 +66,10 @@ function App() {
   return (
     <div className="App">
       <UserContextProvider>
+      <TasksContextProvider>
+
           <AppContent />
+      </TasksContextProvider>
       </UserContextProvider>
     </div>
   );

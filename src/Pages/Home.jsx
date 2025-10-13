@@ -6,11 +6,11 @@ import Login from './Login'
 
 export default function Home() {
   return (
-    <div>
-    <div className="d-flex">
+        <div className="sidebar d-flex flex-column justify-content-between">
 
         <Navbar/>
-  
+        <div className="flex-grow-1 d-flex justify-content-center align-items-center">
+
         </div>
        
 

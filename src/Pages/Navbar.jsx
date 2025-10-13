@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { UserContext } from '../Context/UserContext'
 
 export default function Navbar() {
-    let{logOut} =useContext(UserContext)
+    let{logOut,user} =useContext(UserContext)
     const handlelogout =async ()=>{
 
         const data = await logOut()
@@ -14,10 +14,11 @@ export default function Navbar() {
     }
     return (
         <div className="sidebar d-flex flex-column justify-content-between">
+
         <div>
           <div className="mb-4">
             <p className="mb-1">Welcome,</p>
-            <h5>Hend</h5>
+            <h5>{user.email}</h5>
           </div>
   
           <nav>
