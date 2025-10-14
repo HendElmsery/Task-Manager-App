@@ -57,9 +57,31 @@ export default function TasksContextProvider({ children }) {
     return data; 
   }
   }
+  //Get Completed Task
+  const updateCompleted =async()=>{
+    if (!user) return [];
+
+    let { data, error } = await supabase
+  .from('tasks')
+ 
+  .update({ completed: true })
+  .eq("user_id", user.id)
+//   .eq("id", task_id)
+  .select()
+//   .order("created_at", { ascending: false })
+  if (error) {
+    console.error("Error getting task:", error.message);
+    return null;
+  } else {
+    setTasks(data);
+    console.log("Completed",data)
+    return data; 
+  }
+  }
+  //update task
 
   return (
-    <TasksContext.Provider value={{ createTask,getInProgress, tasks }}>
+    <TasksContext.Provider value={{ createTask,getInProgress, tasks,updateCompleted }}>
       {children}
     </TasksContext.Provider>
   );

@@ -41,7 +41,7 @@ export default function Login() {
 
   }
   return (
-      <div className="content-card m-auto w-50 ">
+      <div className="content-card  ">
       <h3 className="mb-4">Log In</h3>
 
           <form onSubmit={formSubmit}>
@@ -58,7 +58,7 @@ export default function Login() {
                   <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                   <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
               </div> */}
-              <button type="submit" className=" button">Submit</button>
+              <button type="submit" className=" btn-primary">Submit</button>
               <div className="mb-3">
                    <p>Don't Have account?<Link to={'/signup'}>signup</Link></p>
                 </div>

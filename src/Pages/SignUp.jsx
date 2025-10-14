@@ -70,7 +70,7 @@ export default function SignUp() {
                     <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                     <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
                 </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn-primary">Submit</button>
                 <div className="mb-3">
                    <p>Already Have account?<Link to={'/login'}>Login</Link></p>
                 </div>

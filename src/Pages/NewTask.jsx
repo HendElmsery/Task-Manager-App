@@ -1,9 +1,12 @@
 // src/Pages/NewTask.jsx
 import React, { useContext, useState } from "react";
 import { TasksContext } from "../Context/TasksContext";
+import { Navigate, useNavigate } from "react-router-dom";
+
 export default function NewTask() {
   const { createTask,getInProgress } = useContext(TasksContext);
   const [task, setTask] = useState({ title: "", description: "" });
+  const navigate = useNavigate();
 
   const handleTask = (e) => {
     setTask({ ...task, [e.target.name]: e.target.value });
@@ -14,11 +17,13 @@ export default function NewTask() {
     const newTask = await createTask(task.title, task.description);
     console.log("✅ Task created:", newTask);
     setTask({ title: "", description: "" }); // clear form
+    navigate("/task_progress")
+
    
   };
 
   return (
-    <div className="sidebar d-flex flex-column justify-content-between">
+    <div className="content-card">
 
       <h3 className="mb-4">New Task</h3>
 
@@ -47,7 +52,7 @@ export default function NewTask() {
           ></textarea>
         </div>
 
-        <button type="submit" className="btn-save">
+        <button type="submit" className="btn-primary">
           Save
         </button>
       </form>

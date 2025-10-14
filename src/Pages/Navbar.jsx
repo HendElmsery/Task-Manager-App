@@ -13,7 +13,7 @@ export default function Navbar() {
         // }
     }
     return (
-        <div className="sidebar d-flex flex-column justify-content-between">
+        <div className=" ">
 
         <div>
           <div className="mb-4">
