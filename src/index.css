@@ -128,6 +128,62 @@ body {
   background-color: #d03a3a !important;
   transform: translateY(-2px);
 }
+.dashboard-container {
+  background-color: #fbeaea;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-card {
+  width: 60%;
+  background-color: white;
+  border-radius: 16px;
+  padding: 40px;
+}
+
+.dashboard-card h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.dashboard-card h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.dashboard-card p {
+  font-size: 1rem;
+  color: #666;
+}
+/* Override dashboard container to fit layout */
+.dashboard {
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+/* Make numbers bold and centered nicely */
+.dashboard h2 {
+  font-size: 2.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.dashboard p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Keep consistent with your current theme */
+.text-warning {
+  color: #ffb703 !important;
+}
+
+.text-success {
+  color: #38a169 !important;
+}
 
 /* --- Responsive --- */
 @media (max-width: 768px) {

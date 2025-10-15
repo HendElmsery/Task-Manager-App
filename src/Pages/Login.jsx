@@ -25,7 +25,7 @@ export default function Login() {
             user.password,
           );
           if(data.user && data.session){
-            navigate("/navbar")
+            navigate("/dashboard")
         }
        else{
         console.error("no valid data")
