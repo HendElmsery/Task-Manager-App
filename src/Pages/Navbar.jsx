@@ -22,7 +22,7 @@ export default function Navbar() {
           </div>
   
           <nav>
-            <Link className="active" to="/dashboard">Dashboard</Link>
+            <Link className="focus-ring " to="/dashboard">Dashboard</Link>
             <Link  to="/completed_tasks">Completed Tasks</Link>
             <Link to="/task_progress">In Progress Tasks</Link>
             <Link  to="/new_task"><button className='newtask-button'>New Task</button></Link>

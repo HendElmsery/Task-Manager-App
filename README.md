@@ -1,187 +1,70 @@
-# 🧭 Task Manager App (with Supabase Authentication)
+# Getting Started with Create React App
 
-## 🎯 Goal
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-A **React-based Task Manager web app** where users can securely **sign up, log in, and manage tasks** using **Supabase as the backend** for authentication and data handling.
+## Available Scripts
 
----
+In the project directory, you can run:
 
-## ✨ Features
+### `npm start`
 
-✅ **User Authentication (Supabase)**
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-* Sign Up / Login using Supabase Auth
-* Persistent session via Supabase `getSession()`
-* Logout instantly removes session and hides Navbar
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-✅ **Task Management**
+### `npm test`
 
-* Create, view, and update tasks
-* Filter tasks by status (**In Progress** / **Completed**)
-* Tasks can be stored in **Supabase** (or local storage fallback)
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-✅ **Modern UI**
+### `npm run build`
 
-* Glassmorphism-style login/signup pages
-* Sidebar navigation
-* Clean, responsive layout built with React + Tailwind
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
----
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-## 📄 Pages & Features
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### 1. **Login Page**
+### `npm run eject`
 
-* Inputs: Email / Password
-* Uses `supabase.auth.signInWithPassword()`
-* On success → stores session via Supabase + Context
-* Redirects to **Dashboard**
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
----
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-### 2. **Sign Up Page**
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-* Inputs: First Name, Last Name, Age, Password, Confirm Password
-* Uses `supabase.auth.signUp()`
-* On success → redirects to **Login Page**
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
----
+## Learn More
 
-### 3. **Dashboard (Home)**
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-* Displays logged-in user’s name (fetched from Supabase session)
-* Shows overview of:
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-  * Total tasks
-  * In Progress tasks
-  * Completed tasks
+### Code Splitting
 
----
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### 4. **New Task Page**
+### Analyzing the Bundle Size
 
-* Form: `Title`, `Description`
-* Adds a new task to Supabase with default `status = "in-progress"`
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
----
+### Making a Progressive Web App
 
-### 5. **In Progress Tasks Page**
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-* Lists all Supabase tasks with `status = "in-progress"`
-* Each task has a **Mark as Completed** button
-* Updates status in Supabase
+### Advanced Configuration
 
----
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### 6. **Completed Tasks Page**
+### Deployment
 
-* Lists tasks with `status = "completed"` from Supabase
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
----
+### `npm run build` fails to minify
 
-### 7. **Navbar (Sidebar)**
-
-* Visible only when user is logged in
-* Links: Dashboard, New Task, In Progress, Completed
-* Displays current user’s name
-* Logout button → calls `supabase.auth.signOut()`
-
-  * Clears session from Context
-  * Redirects to Login
-  * Hides Navbar immediately
-
----
-
-## 🔐 Authentication Rules
-
-| Condition                     | Behavior                                                 |
-| ----------------------------- | -------------------------------------------------------- |
-| User **not logged in**        | Redirect to **Login Page**                               |
-| User **logs in successfully** | Session stored via Supabase and Context                  |
-| User **reloads page**         | Supabase restores session automatically (`getSession()`) |
-| User **clicks Logout**        | `signOut()` clears session + hides Navbar                |
-
----
-
-## ⚙️ Tech Stack
-
-| Tool                         | Purpose                             |
-| ---------------------------- | ----------------------------------- |
-| **React 18+**                | Frontend framework                  |
-| **React Router v7**          | Navigation and routing              |
-| **Supabase**                 | Authentication and database backend |
-| **Context API**              | Manage user and task state          |
-| **Tailwind CSS / Plain CSS** | UI styling                          |
-| **Vite**                     | Development environment             |
-
----
-
-## 📁 Context Overview
-
-* **`UserContext`**
-
-  * Manages login/logout
-  * Uses Supabase `onAuthStateChange()` to track session
-  * Exposes `logIn`, `signUp`, `logOut`, and `user` state
-
-* **`TaskContext`**
-
-  * Handles CRUD operations for tasks
-  * Syncs with Supabase table (or local fallback if offline)
-
----
-
-## 🚀 Run Locally
-
-```bash
-# Clone repo
-git clone https://github.com/yourusername/task-manager-supabase.git
-
-# Move to project folder
-cd task-manager-supabase
-
-# Install dependencies
-npm install
-
-# Create .env file for Supabase keys
-VITE_SUPABASE_URL=your-supabase-url
-VITE_SUPABASE_ANON_KEY=your-anon-key
-
-# Run development server
-npm run dev
-```
-
----
-
-## 🧩 Folder Structure
-
-```
-src/
-│
-├── Context/
-│   ├── UserContext.jsx
-│   └── TaskContext.jsx
-│
-├── Pages/
-│   ├── Login.jsx
-│   ├── SignUp.jsx
-│   ├── Dashboard.jsx
-│   ├── NewTask.jsx
-│   ├── TasksProgress.jsx
-│   ├── CompletedTasks.jsx
-│   ├── Navbar.jsx
-│   └── ProtectedRoute.jsx
-│
-├── App.jsx
-└── main.jsx
-```
-
----
-
-## 🧠 Future Enhancements
-
-* 🔐 Email verification via Supabase
-* 🗂️ Drag-and-drop task organization
-* 🧭 Search and filter tasks
-* 🪄 Task categories and due dates
-* 🌐 Deploy on **Netlify** with live Supabase backend
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

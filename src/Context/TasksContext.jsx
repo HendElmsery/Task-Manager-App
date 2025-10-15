@@ -109,10 +109,29 @@ export default function TasksContextProvider({ children }) {
             return data;
         }
     }    
+// update task 
+const updateTask = async (title,description,task_id) => {
+    if (!user) return [];
+    
+const { data, error } = await supabase
+.from('tasks')
+.update({ title: title, description:description })
+.eq('id', task_id)
+.select()
 
+        
+    if (error) {
+        console.error("Error getting task:", error.message);
+        return null;
+    } else {
+        setTasks(data);
+        console.log("All", data)
+        return data;
+    }
+}    
 
     return (
-        <TasksContext.Provider value={{ createTask, getInProgress, tasks, updateCompleted,getCompleted,getAllTasks }}>
+        <TasksContext.Provider value={{ createTask, getInProgress, tasks, updateCompleted,getCompleted,getAllTasks,updateTask }}>
             {children}
         </TasksContext.Provider>
     );

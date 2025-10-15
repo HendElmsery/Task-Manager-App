@@ -1,12 +1,22 @@
 import React, { useContext, useEffect } from 'react'
 import { TasksContext } from '../Context/TasksContext'
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function TasksProgress() {
-    let { tasks, getInProgress, updateCompleted } = useContext(TasksContext)
+    let { tasks, getInProgress, updateCompleted ,updateTask} = useContext(TasksContext)
+      const navigate = useNavigate();
+
     function handleComplete(task_id) {
         updateCompleted(task_id)
+        navigate('/completed_tasks')
         // if()
+    }
+    function handleEdit(title,description,task_id){
+        const newTitle = prompt("Edit Title:", title);
+        const newDesc = prompt("Edit Description:", description);
+        if (newTitle && newDesc) updateTask(newTitle, newDesc, task_id);
+      
     }
     useEffect(() => {
         getInProgress()
@@ -30,7 +40,7 @@ export default function TasksProgress() {
                             <p>{task.created_at}</p>
                             <div className='row'>
                                 <div className='col'>
-                                    <button className='btn-primary bg-green'>Edit</button>
+                                    <button className='btn-primary bg-green'onClick={()=>handleEdit(task.title,task.description,task.id)}>Edit</button>
                                 </div>
                                 <div className='col'>
                                     {/* <Link to={'/completed_tasks'}> */}
