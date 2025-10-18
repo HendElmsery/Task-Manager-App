@@ -1,9 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../Context/UserContext'
 
 export default function Navbar() {
     let{logOut,user} =useContext(UserContext)
+    const [visible, setvisible] = useState("Show")
     const handlelogout =async ()=>{
 
         const data = await logOut()
@@ -11,6 +12,9 @@ export default function Navbar() {
         //     navigate('/login');
 
         // }
+    }
+    function handleShow() {
+        setvisible("Hidden")
     }
     return (
         <div className=" ">
@@ -22,10 +26,12 @@ export default function Navbar() {
           </div>
   
           <nav>
-            <Link className="focus-ring " to="/dashboard">Dashboard</Link>
-            <Link  to="/completed_tasks">Completed Tasks</Link>
-            <Link to="/task_progress">In Progress Tasks</Link>
-            <Link  to="/new_task"><button className='newtask-button'>New Task</button></Link>
+            
+            
+            <Link onClick={handleShow} className="focus-ring " to="/dashboard">Dashboard</Link>
+            <Link onClick={handleShow}  to="/completed_tasks">Completed Tasks</Link>
+            <Link onClick={handleShow} to="/task_progress">In Progress Tasks</Link>
+            <Link onClick={handleShow}  to="/new_task"><button className='newtask-button'>New Task</button></Link>
           </nav>
         </div>
         

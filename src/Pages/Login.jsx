@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../Context/UserContext'
 import { Link, useNavigate } from 'react-router-dom'
+import { ToastContext } from '../Context/ToastContext'
+import Toast from './Toast'
 
 export default function Login() {
   let {logIn} =  useContext(UserContext)
+  let{message,type,show,showToast,hideToast} =useContext(ToastContext)
   const [user, setUser] = useState({ email: "", password: ""});
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -26,8 +29,12 @@ export default function Login() {
           );
           if(data.user && data.session){
             navigate("/dashboard")
+            //  showToast("Login successed.", "success")
+             
         }
        else{
+        // showToast("Logged in Error","Error")
+        showToast("Login failed. Check your credentials.", "error")
         console.error("no valid data")
        }
       }
@@ -41,7 +48,9 @@ export default function Login() {
 
   }
   return (
+  
       <div className="content-card  ">
+          <Toast showToast={showToast} type = {type} />
       <h3 className="mb-4">Log In</h3>
 
           <form onSubmit={formSubmit}>
@@ -54,10 +63,7 @@ export default function Login() {
                   <label htmlFor="exampleInputPassword1" className="form-label"name ="password">Password</label>
                   <input type="password" className="form-control" id="exampleInputPassword1" name="password" onChange={inputsChange} />
               </div>
-              {/* <div className="mb-3 form-check">
-                  <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                  <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-              </div> */}
+        
               <button type="submit" className=" btn-primary">Submit</button>
               <div className="mb-3">
                    <p>Don't Have account?<Link to={'/signup'}>signup</Link></p>

@@ -25,7 +25,7 @@ export default function CompletedTasks() {
              
             </div>
           </div>
-        )) : <div className='col'><p className='bg-red'>No In progress tasks</p></div>}
+        )) : <div className='col'><p className='bg-red'>No Completed tasks</p></div>}
       </div>
     </div>)
 }

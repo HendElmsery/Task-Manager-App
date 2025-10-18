@@ -1,38 +1,43 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { TasksContext } from '../Context/TasksContext'
 import { Link } from 'react-router-dom'
 import { Navigate, useNavigate } from "react-router-dom";
+import EditTaskModal from './EditTaskModal';
 
 export default function TasksProgress() {
-    let { tasks, getInProgress, updateCompleted ,updateTask} = useContext(TasksContext)
-      const navigate = useNavigate();
+    let { tasks, getInProgress, updateCompleted, updateTask } = useContext(TasksContext)
+    const [selectedTask, setSelectedTask] = useState(null);
+
+    const [show, setshow] = useState("false")
+    const navigate = useNavigate();
 
     function handleComplete(task_id) {
         updateCompleted(task_id)
         navigate('/completed_tasks')
         // if()
     }
-    function handleEdit(title,description,task_id){
-        const newTitle = prompt("Edit Title:", title);
-        const newDesc = prompt("Edit Description:", description);
-        if (newTitle && newDesc) updateTask(newTitle, newDesc, task_id);
-      
+    function openEdit(task) {
+        setSelectedTask(task)
+
     }
+    function closeModal() {
+        setSelectedTask(null);
+      }
     useEffect(() => {
         getInProgress()
-
-        //   return () => {
-        //     second
-        //   }
     }, [])
 
     return (
         <div className="content-card">
+            {selectedTask && (
+                <EditTaskModal task={selectedTask} onClose={closeModal} />
+            )}
+
 
             <h3 className="mb-4">In Progeress Task</h3>
             <div className='row'>
-                
-                {tasks.length>0 ? tasks.map((task, index) => (
+
+                {tasks.length > 0 ? tasks.map((task, index) => (
                     <div className='col' key={index}>
                         <div className='in-progress card p-3 m-2' >
                             <h3>{task.title}</h3>
@@ -40,7 +45,10 @@ export default function TasksProgress() {
                             <p>{task.created_at}</p>
                             <div className='row'>
                                 <div className='col'>
-                                    <button className='btn-primary bg-green'onClick={()=>handleEdit(task.title,task.description,task.id)}>Edit</button>
+                                    <button className='btn-primary bg-green'
+                                        onClick={() => { openEdit(task) }}
+
+                                    >Edit</button>
                                 </div>
                                 <div className='col'>
                                     {/* <Link to={'/completed_tasks'}> */}
