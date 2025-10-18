@@ -11,7 +11,6 @@ export default function TasksContextProvider({ children }) {
   // Create a new task
   const createTask = async (title, description) => {
     if (!user) {
-      console.error("No user logged in");
       return;
     }
 
@@ -29,7 +28,6 @@ export default function TasksContextProvider({ children }) {
       .select();
 
     if (error) {
-      console.error("Error creating task:", error.message);
       return null;
     }
 
@@ -48,7 +46,6 @@ export default function TasksContextProvider({ children }) {
       .order("created_at", { ascending: false });
 
     if (error) {
-      console.error("Error getting tasks:", error.message);
       return [];
     }
     setTasks(data);
@@ -67,7 +64,6 @@ export default function TasksContextProvider({ children }) {
       .select();
 
     if (error) {
-      console.error("Error updating task:", error.message);
       return [];
     }
 
@@ -87,7 +83,6 @@ export default function TasksContextProvider({ children }) {
       .eq("status", "completed");
 
     if (error) {
-      console.error("Error getting completed tasks:", error.message);
       return [];
     }
 
@@ -104,7 +99,6 @@ export default function TasksContextProvider({ children }) {
       .eq("user_id", user.id);
 
     if (error) {
-      console.error("Error getting all tasks:", error.message);
       return [];
     }
 
@@ -123,7 +117,6 @@ export default function TasksContextProvider({ children }) {
       .select();
 
     if (error) {
-      console.error("Error updating task:", error.message);
       return [];
     }
 

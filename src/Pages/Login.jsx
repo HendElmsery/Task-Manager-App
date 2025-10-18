@@ -35,7 +35,6 @@ export default function Login() {
        else{
         // showToast("Logged in Error","Error")
         showToast("Login failed. Check your credentials.", "error")
-        console.error("no valid data")
        }
       }
       catch(error){
